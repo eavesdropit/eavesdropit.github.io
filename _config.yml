@@ -20,7 +20,7 @@ url: "http://eavesdropit.github.io" # the base hostname & protocol for your site
 #These settings might be able to go?
 author: Niklas Akerlund
 twitter_username: eavesdrop_it
-github_username:  eavesdropit/vniklas
+github_username:  vniklas
 company_name: EavesDropIT
 
 # Build settings
