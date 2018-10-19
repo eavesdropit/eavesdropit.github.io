@@ -1,13 +1,13 @@
+{% if site.theme_settings.footer_text %}
 <footer class="site-footer">
-
-  <div class="wrapper">
-
-    <h2 class="footer-heading">{{ site.title }}</h2>
-    <p>
-      {{ site.description }}
-      {% include icon-github.html %}
-    </p>
-
-  </div>
-
+    <p class="text">{{ site.theme_settings.footer_text }}</p>
+            <div class="footer-icons">
+                <ul>
+                <!-- Social icons from Font Awesome, if enabled -->
+                {% include icons.html %}
+                </ul>
+            </div>
 </footer>
+{% endif %}
+
+
