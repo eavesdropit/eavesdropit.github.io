@@ -1,59 +1,64 @@
 ---
 layout: default
-title: Jekyll Themes
+cover: 'http://www.abisolutions.org.uk/website/images/ConferencesHR.jpg'
 ---
 
-<div class="gallery">
-	{% for post in paginator.posts %}
-		<div class="item">
-			<a class="item-inner" href="{{ post.url }}">
-				<div class="item-image"><img src="/thumbnails/{{ post.thumbnail }}"></div>
-				<div class="item-name">{{ post.title }}</div>
-			</a>
-		</div>
-	{% endfor %}
-</div>
 
-<!-- Pager -->
 
-<div class="row-fluid">
-  <div class="span12">
-    <div class="pagination">
-      <ul>
-        {% if paginator.previous_page %}
+<div class="home">
+    
+    {% capture currentDate %}{{'now' | date: '%s' }}{% endcapture %}
 
-          {% if paginator.previous_page == 1 %}
-            <li><a href="/">Prev</a></li>
-          {% else %}
-            <li><a href="/page{{ paginator.previous_page }}">Prev</a></li>
-          {% endif %}
+    <div class="clearfix">
 
-        {% else %}
-          <li><span class="disabled">Prev</span></li>
+      <h1 class="event-time-heading fix-top">Future {% if site.event_label %} {{site.event_label}} {% else %} Events {% endif %} </h1>
+
+      {% for post in site.posts reversed %}
+
+        {% capture blogDate %}{{post.date | date: '%s' }}{% endcapture %}
+
+        {% if blogDate >= currentDate %}
+      
+          <a href="{{ post.url | prepend: site.baseurl }}">
+            {% if post.cover %}
+            <div class="event-sqaure" style="background-image:url({{post.cover}});">
+            {% else %}
+            <div class="event-sqaure" style="background-image:url(http://evento.io/img/cover.jpg);">
+            {% endif %}
+              <h2>{{ post.title }} <span>{{ post.date | date: "%b %-d, %Y" }}</span></h2>
+               <div class='event-square-overlay'></div>
+            </div>
+           
+          </a>
+
         {% endif %}
 
-        {% if paginator.page == 1 %}
-          <li><span class="active">1</span></li>
-        {% else %}
-          <li><a href="/">1</a></li>
-        {% endif %}
-
-        {% for count in (2..paginator.total_pages) %}
-
-          {% if count == paginator.page %}
-            <li><span class="active">{{ count }}</span></li>
-          {% else %}
-            <li><a href="/page{{ count }}">{{ count }}</a></li>
-          {% endif %}
-        {% endfor %}
-
-        {% if paginator.next_page %}
-          <li><a href="/page{{ paginator.next_page }}">Next</a></li>
-        {% else %}
-          <li><span class="disabled">Next</span></li>
-        {% endif %}
-      </ul>
+      {% endfor %}
     </div>
-  </div>
-</div>
+    <div class="clearfix">
 
+      <h1 class="event-time-heading">Past {% if site.event_label %} {{site.event_label}} {% else %} Events {% endif %} </h1>
+      {% for post in site.posts %}
+
+        {% capture blogDate %}{{post.date | date: '%s' }}{% endcapture %}
+
+        {% if blogDate < currentDate %}
+
+          <a href="{{ post.url | prepend: site.baseurl }}">
+            {% if post.cover %}
+            <div class="event-sqaure" style="background-image:url({{post.cover}});">
+            {% else %}
+            <div class="event-sqaure" style="background-image:url(http://app-beacon.com/wp-content/uploads/2015/05/events.jpg);">
+            {% endif %}
+              <h2>{{ post.title }} <span>{{ post.date | date: "%b %-d, %Y" }}</span></h2>
+              <div class='event-square-overlay'></div>
+            </div>
+            
+          </a>
+
+        {% endif %}
+
+      {% endfor %}
+    </div>
+
+</div>
